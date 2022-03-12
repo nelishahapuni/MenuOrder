@@ -9,7 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     //picker: the currencyRate on the picker is being updated in this var
-    @State var currencyRate: Double = 1.0
+    @State private var currencyRate: Double = 1.0
+    let currencyRateOptions: [Double] = [1.0,1.1,1.96]
+    @State private var currency: String = "EUR"
+    let currencyOptions: [String] = ["EUR","USD","BGN"]
     
     //Meal amount & prices
     @State private var soupAmount: Int = 0
@@ -27,14 +30,17 @@ struct ContentView: View {
     //toggle state
     @State var toggleIsOn: Bool = false
     
+    
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("Currency")) {
                     Picker(selection: $currencyRate, label: Text("Currency"), content: {
-                        Text("EUR").tag(1.0)
-                        Text("USD").tag(1.1)
-                        Text("BGN").tag(1.96)
+                        ForEach(currencyOptions.indices) { index in
+                            Text(currencyOptions[index])
+                                .tag(currencyRateOptions[index])
+                            
+                        }
                     })
                     .pickerStyle(SegmentedPickerStyle())
                     .padding()
@@ -70,6 +76,7 @@ struct ContentView: View {
                     let totalCokePrice: Double = cokeAmount * 2
                     let deliveryPrice: Int = 10
                     let totalPrice = totalMealPrice + totalCokePrice
+                    let currIndex = currencyRateOptions.firstIndex(of: currencyRate)!
                     
                     HStack{
                         VStack(alignment: .leading) {
@@ -84,6 +91,11 @@ struct ContentView: View {
                             HStack{
                                 Text("Total:")
                                 Text(toggleIsOn ? String(format: "%.2f", (totalPrice + Double(deliveryPrice)) * currencyRate) : String(format: "%.2f", totalPrice * currencyRate))
+                            }
+                            HStack{
+                                Text("Currency Used:")
+                                Text(currencyOptions[currIndex])
+                                
                             }
                         }
                     }
@@ -100,3 +112,12 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+
+//Picker(selection: $currencyRate, label: Text("Currency"), content: {
+//    Text("EUR").tag(1.0)
+//    Text("USD").tag(1.1)
+//    Text("BGN").tag(1.96)
+//})
+//.pickerStyle(SegmentedPickerStyle())
+//.padding()
