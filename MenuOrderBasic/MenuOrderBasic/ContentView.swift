@@ -89,10 +89,10 @@ struct ContentView: View {
                 
                 Section(header: Text("Drinks")){
                     VStack(alignment: .leading,spacing: 0){
-                        Text("Coke")
+                        Text("Coca Cola")
                             .bold()
                         HStack{
-                            Text(String(format: "%.2f ", (1.50*currencyRate)) + "\(currencyOptions[currIndex])/Litre")
+                            Text(String(format: "%.2f ", (2*currencyRate)) + "\(currencyOptions[currIndex])/Litre")
                             Slider(value: $cokeAmount, in: 0...2, step: 0.1, minimumValueLabel: Text(""), maximumValueLabel: Text(String(format: "%.2fL", cokeAmount)), label: {
                                 Text("coke")
                             })
@@ -101,12 +101,18 @@ struct ContentView: View {
                     }
                 }
                 Section(header: Text("Order")) {
+                    VStack(alignment: .leading, spacing: 0){
+                    Text("Home Delivery")
+                        .bold()
                     Toggle(
                         isOn: $toggleIsOn,
                         label: {
-                            Text("Home Delivery")
+                            
+                            Text(String(format: "%.2f ", (10*currencyRate)) + "\(currencyOptions[currIndex])")
+                                .font(.subheadline)
                         })
                         .toggleStyle(SwitchToggleStyle(tint: .yellow))
+                    }
                 }
                 Section(header: Text("Price")){
                     
