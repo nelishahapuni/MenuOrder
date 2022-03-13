@@ -32,6 +32,11 @@ struct ContentView: View {
     
     var body: some View {
         let currIndex = currencyRateOptions.firstIndex(of: currencyRate)!
+        let totalMealPrice: Double = Double(soupAmount) * soupPrice + Double(mainDishAmount) * mainDishPrice + Double(dessertAmount) * dessertPrice
+        let totalCokePrice: Double = cokeAmount * 2
+        let deliveryPrice: Int = 10
+        let totalPrice = totalMealPrice + totalCokePrice
+        
         NavigationView {
             Form {
                 Section(header: Text("Currency")) {
@@ -114,11 +119,6 @@ struct ContentView: View {
                 }
                 Section(header: Text("Price")){
                     
-                    let totalMealPrice: Double = Double(soupAmount) * soupPrice + Double(mainDishAmount) * mainDishPrice + Double(dessertAmount) * dessertPrice
-                    let totalCokePrice: Double = cokeAmount * 2
-                    let deliveryPrice: Int = 10
-                    let totalPrice = totalMealPrice + totalCokePrice
-                    
                     HStack{
                         VStack(alignment: .leading) {
                             
@@ -144,4 +144,3 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
-
