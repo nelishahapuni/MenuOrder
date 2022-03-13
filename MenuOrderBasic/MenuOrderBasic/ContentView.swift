@@ -44,7 +44,6 @@ struct ContentView: View {
                         ForEach(currencyOptions.indices) { index in
                             Text(currencyOptions[index])
                                 .tag(currencyRateOptions[index])
-                            
                         }
                     })
                     .pickerStyle(SegmentedPickerStyle())
@@ -52,42 +51,10 @@ struct ContentView: View {
                 }
                 
                 Section(header: Text("Meals")){
-                    VStack(alignment: .leading,spacing: 0){
-                        Text("Soup")
-                            .bold()
-                        HStack{
-                            Stepper(String(format: "%.2f ", (2.00*currencyRate)) + "\(currencyOptions[currIndex])", value: $soupAmount, in: 0...10)
-                                .font(.subheadline)
-                            Spacer()
-                            Spacer()
-                            Text("\(soupAmount)")
-                                .font(.subheadline)
-                        }
-                    }
-                    VStack(alignment: .leading,spacing: 0) {
-                        Text("Main Dish")
-                            .bold()
-                        HStack{
-                            Stepper(String(format: "%.2f ", (4.50*currencyRate)) + "\(currencyOptions[currIndex])", value: $mainDishAmount, in: 0...10)
-                                .font(.subheadline)
-                            Spacer()
-                            Spacer()
-                            Text("\(mainDishAmount)")
-                                .font(.subheadline)
-                        }
-                    }
-                    VStack(alignment: .leading,spacing: 0) {
-                        Text("Dessert")
-                            .bold()
-                        HStack{
-                            Stepper(String(format: "%.2f ", (1.50*currencyRate)) + "\(currencyOptions[currIndex])", value: $dessertAmount, in: 0...10)
-                                .font(.subheadline)
-                            Spacer()
-                            Spacer()
-                            Text("\(dessertAmount)")
-                                .font(.subheadline)
-                        }
-                    }
+                    MealsSection(mealName: "Dessert", currencyRate: currencyRate, currencyName: currencyOptions[currIndex], mealPrice: soupPrice, mealAmount: $soupAmount)
+                    MealsSection(mealName: "Main Dish", currencyRate: currencyRate, currencyName: currencyOptions[currIndex], mealPrice: mainDishPrice, mealAmount: $mainDishAmount)
+                    MealsSection(mealName: "Dessert", currencyRate: currencyRate, currencyName: currencyOptions[currIndex], mealPrice: dessertPrice, mealAmount: $dessertAmount)
+                    
                 }
                 
                 Section(header: Text("Drinks")){
@@ -144,3 +111,29 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+
+struct MealsSection: View {
+    
+    var mealName: String
+    var currencyRate: Double
+    var currencyName: String
+    var mealPrice: Double
+    @Binding var mealAmount: Int
+    
+    var body: some View {
+        VStack(alignment: .leading,spacing: 0) {
+            Text(mealName)
+                .bold()
+            HStack{
+                Stepper(String(format: "%.2f ", (mealPrice*currencyRate)) + "\(currencyName)", value: $mealAmount, in: 0...10)
+                    .font(.subheadline)
+                Spacer()
+                Spacer()
+                Text("\(mealAmount)")
+                    .font(.subheadline)
+            }
+        }
+    }
+}
+

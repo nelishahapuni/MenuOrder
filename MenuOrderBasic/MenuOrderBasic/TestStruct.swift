@@ -81,3 +81,43 @@
 //    }
 //}
 //
+
+//old code
+
+//-------
+//                    VStack(alignment: .leading,spacing: 0){
+//                        Text("Soup")
+//                            .bold()
+//                        HStack{
+//                            Stepper(String(format: "%.2f ", (2.00*currencyRate)) + "\(currencyOptions[currIndex])", value: $soupAmount, in: 0...10)
+//                                .font(.subheadline)
+//                            Spacer()
+//                            Spacer()
+//                            Text("\(soupAmount)")
+//                                .font(.subheadline)
+//                        }
+//                    }
+//                    VStack(alignment: .leading,spacing: 0) {
+//                        Text("Main Dish")
+//                            .bold()
+//                        HStack{
+//                            Stepper(String(format: "%.2f ", (4.50*currencyRate)) + "\(currencyOptions[currIndex])", value: $mainDishAmount, in: 0...10)
+//                                .font(.subheadline)
+//                            Spacer()
+//                            Spacer()
+//                            Text("\(mainDishAmount)")
+//                                .font(.subheadline)
+//                        }
+//                    }
+//                    VStack(alignment: .leading,spacing: 0) {
+//                        Text("Dessert")
+//                            .bold()
+//                        HStack{
+//                            Stepper(String(format: "%.2f ", (1.50*currencyRate)) + "\(currencyOptions[currIndex])", value: $dessertAmount, in: 0...10)
+//                                .font(.subheadline)
+//                            Spacer()
+//                            Spacer()
+//                            Text("\(dessertAmount)")
+//                                .font(.subheadline)
+//                        }
+//                    }
