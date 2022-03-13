@@ -31,7 +31,6 @@ struct ContentView: View {
     //toggle state
     @State var toggleIsOn: Bool = false
     
-    
     var body: some View {
         let currIndex = currencyRateOptions.firstIndex(of: currencyRate)!
         NavigationView {
@@ -102,16 +101,16 @@ struct ContentView: View {
                 }
                 Section(header: Text("Order")) {
                     VStack(alignment: .leading, spacing: 0){
-                    Text("Home Delivery")
-                        .bold()
-                    Toggle(
-                        isOn: $toggleIsOn,
-                        label: {
-                            
-                            Text(String(format: "%.2f ", (10*currencyRate)) + "\(currencyOptions[currIndex])")
-                                .font(.subheadline)
-                        })
-                        .toggleStyle(SwitchToggleStyle(tint: .yellow))
+                        Text("Home Delivery")
+                            .bold()
+                        Toggle(
+                            isOn: $toggleIsOn,
+                            label: {
+                                
+                                Text(String(format: "%.2f ", (10*currencyRate)) + "\(currencyOptions[currIndex])")
+                                    .font(.subheadline)
+                            })
+                            .toggleStyle(SwitchToggleStyle(tint: .yellow))
                     }
                 }
                 Section(header: Text("Price")){
@@ -131,6 +130,7 @@ struct ContentView: View {
                                     .font(.subheadline)
                                     .bold()
                             }
+
                         }
                     }
                 }
