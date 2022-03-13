@@ -9,21 +9,21 @@ import SwiftUI
 
 struct ContentView: View {
     //picker: the currencyRate on the picker is being updated in this var
-    @State private var currencyRate: Double = 1.0
+    @State var currencyRate: Double = 1.0
     let currencyRateOptions: [Double] = [1.0,1.1,1.96]
-    @State private var currency: String = "EUR"
+    @State var currency: String = "EUR"
     let currencyOptions: [String] = ["EUR","USD","BGN"]
     
     //Meal amount & prices
-    @State private var soupAmount: Int = 0
-    private var soupPrice: Double = 2.0
-    @State private var soupAmountInput = ""
+    @State var soupAmount: Int = 0
+    var soupPrice: Double = 2.0
+    @State var soupAmountInput = ""
     
-    @State private var mainDishAmount: Int = 0
-    private var mainDishPrice: Double = 4.5
+    @State var mainDishAmount: Int = 0
+    var mainDishPrice: Double = 4.5
     
-    @State private var dessertAmount: Int = 0
-    private var dessertPrice: Double = 1.5
+    @State var dessertAmount: Int = 0
+    var dessertPrice: Double = 1.5
     
     //drinks slider
     @State var cokeAmount: Double = 0.0
@@ -130,7 +130,7 @@ struct ContentView: View {
                                     .font(.subheadline)
                                     .bold()
                             }
-
+                            
                         }
                     }
                 }
