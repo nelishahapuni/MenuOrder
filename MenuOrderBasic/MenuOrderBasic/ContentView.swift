@@ -17,7 +17,6 @@ struct ContentView: View {
     //Meal amount & prices
     @State var soupAmount: Int = 0
     var soupPrice: Double = 2.0
-    @State var soupAmountInput = ""
     
     @State var mainDishAmount: Int = 0
     var mainDishPrice: Double = 4.5
@@ -145,3 +144,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
