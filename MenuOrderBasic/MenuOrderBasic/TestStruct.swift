@@ -121,3 +121,18 @@
 //                                .font(.subheadline)
 //                        }
 //                    }
+
+
+//------------------------
+//currency section old
+
+//                Section(header: Text("Currency")) {
+//                    Picker(selection: $currencyRate, label: Text("Currency"), content: {
+//                        ForEach(currencyOptions.indices) { index in
+//                            Text(currencyOptions[index])
+//                                .tag(currencyRateOptions[index])
+//                        }
+//                    })
+//                    .pickerStyle(SegmentedPickerStyle())
+//                    .padding()
+//                }

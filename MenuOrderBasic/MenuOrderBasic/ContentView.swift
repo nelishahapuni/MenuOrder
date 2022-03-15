@@ -39,17 +39,6 @@ struct ContentView: View {
         
         NavigationView {
             List {
-//                Section(header: Text("Currency")) {
-//                    Picker(selection: $currencyRate, label: Text("Currency"), content: {
-//                        ForEach(currencyOptions.indices) { index in
-//                            Text(currencyOptions[index])
-//                                .tag(currencyRateOptions[index])
-//                        }
-//                    })
-//                    .pickerStyle(SegmentedPickerStyle())
-//                    .padding()
-//                }
-                
                 CurrencySection(currencyRateOptions: currencyRateOptions, currencyOptions: currencyOptions, currencyRate: $currencyRate)
                 
                 Section(header: Text("Meals")){
@@ -156,6 +145,5 @@ struct CurrencySection: View {
             .pickerStyle(SegmentedPickerStyle())
             .padding()
         }
-        .navigationTitle("Menu Order")
     }
 }
