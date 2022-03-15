@@ -38,17 +38,19 @@ struct ContentView: View {
         let totalPrice = totalMealPrice + totalCokePrice
         
         NavigationView {
-            Form {
-                Section(header: Text("Currency")) {
-                    Picker(selection: $currencyRate, label: Text("Currency"), content: {
-                        ForEach(currencyOptions.indices) { index in
-                            Text(currencyOptions[index])
-                                .tag(currencyRateOptions[index])
-                        }
-                    })
-                    .pickerStyle(SegmentedPickerStyle())
-                    .padding()
-                }
+            List {
+//                Section(header: Text("Currency")) {
+//                    Picker(selection: $currencyRate, label: Text("Currency"), content: {
+//                        ForEach(currencyOptions.indices) { index in
+//                            Text(currencyOptions[index])
+//                                .tag(currencyRateOptions[index])
+//                        }
+//                    })
+//                    .pickerStyle(SegmentedPickerStyle())
+//                    .padding()
+//                }
+                
+                CurrencySection(currencyRateOptions: currencyRateOptions, currencyOptions: currencyOptions, currencyRate: $currencyRate)
                 
                 Section(header: Text("Meals")){
                     MealsSection(mealName: "Dessert", currencyRate: currencyRate, currencyName: currencyOptions[currIndex], mealPrice: soupPrice, mealAmount: $soupAmount)
@@ -137,3 +139,23 @@ struct MealsSection: View {
     }
 }
 
+struct CurrencySection: View {
+    
+    var currencyRateOptions: [Double]
+    var currencyOptions: [String]
+    @Binding var currencyRate: Double
+    
+    var body: some View {
+        Section {
+            Picker(selection: $currencyRate, label: Text("Currency"), content: {
+                ForEach(currencyOptions.indices) { index in
+                    Text(currencyOptions[index])
+                        .tag(currencyRateOptions[index])
+                }
+            })
+            .pickerStyle(SegmentedPickerStyle())
+            .padding()
+        }
+        .navigationTitle("Menu Order")
+    }
+}
