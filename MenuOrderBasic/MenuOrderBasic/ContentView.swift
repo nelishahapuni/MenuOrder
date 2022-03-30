@@ -37,7 +37,7 @@ struct ContentView: View {
         let deliveryPrice: Int = 10
         let totalPrice = totalMealPrice + totalCokePrice
         
-        NavigationView {
+        Form {
             List {
                 CurrencySection(currencyRateOptions: currencyRateOptions, currencyOptions: currencyOptions, currencyRate: $currencyRate)
                 
