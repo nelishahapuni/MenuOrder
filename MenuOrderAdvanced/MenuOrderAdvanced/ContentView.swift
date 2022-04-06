@@ -18,7 +18,13 @@ struct FoodModel: Identifiable {
 
 struct ContentView: View {
     
+    
+    //NOTE TO SELF: Use the index of the tab view to access the specific burger
+    
+    @Environment(\.presentationMode) var presentationMode
+    
     @StateObject private var burgerViewModel: BurgerViewModel = BurgerViewModel()
+    
     
     var body: some View {
         ZStack {

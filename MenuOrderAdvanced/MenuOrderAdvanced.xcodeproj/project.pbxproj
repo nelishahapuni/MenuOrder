@@ -102,8 +102,8 @@
 			isa = PBXGroup;
 			children = (
 				05AA383127FCAADF0046FED6 /* MenuOrderAdvancedApp.swift */,
-				05AA383327FCAADF0046FED6 /* ContentView.swift */,
 				0573460F27FDCA6600BFA378 /* MainMenu.swift */,
+				05AA383327FCAADF0046FED6 /* ContentView.swift */,
 				05AA383527FCAAE00046FED6 /* Assets.xcassets */,
 				05AA383A27FCAAE00046FED6 /* Info.plist */,
 				05AA383727FCAAE00046FED6 /* Preview Content */,
