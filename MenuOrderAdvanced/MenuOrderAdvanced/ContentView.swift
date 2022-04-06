@@ -13,12 +13,12 @@ struct FoodModel: Identifiable {
     let foodDesc : String
     let imageName : String
     let foodPrice : Double
-    let isAvailable : Bool
+    let isVegan : Bool
 }
 
 struct ContentView: View {
     
-    @StateObject var burgerViewModel: BurgerViewModel = BurgerViewModel()
+    @StateObject private var burgerViewModel: BurgerViewModel = BurgerViewModel()
     
     var body: some View {
         ZStack {
@@ -27,7 +27,7 @@ struct ContentView: View {
             VStack {
                 TabView{
                     ForEach(burgerViewModel.burgerArray) { burger in
-                        ShowFood(foodName: burger.foodName, foodDesc: burger.foodDesc, imageName: burger.imageName, foodPrice: burger.foodPrice, isAvailable: burger.isAvailable)
+                        ShowFood(foodName: burger.foodName, foodDesc: burger.foodDesc, imageName: burger.imageName, foodPrice: burger.foodPrice, isAvailable: burger.isVegan)
                     }
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
@@ -43,33 +43,61 @@ struct ShowFood : View {
     var foodPrice : Double
     var isAvailable : Bool
     var body: some View {
-        VStack(alignment: .center) {
+        VStack(alignment: .leading) {
             Spacer()
             Image(imageName)
                 .resizable()
                 .scaledToFill()
-                .frame(width: 350, height: 330)
+                .frame(width: UIScreen.main.bounds.size.width*0.8, height: UIScreen.main.bounds.size.height*0.3)
                 .padding()
-            
+            HStack{
             Text(foodName)
                 .bold()
                 .font(.title)
-            
+                
+                if isAvailable {
+                    Image(systemName: "leaf.fill")
+                        .foregroundColor(.blue)
+                }
+            }
             Text(foodDesc)
                 .font(.subheadline)
-                .foregroundColor(Color(#colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)))
+                .foregroundColor(Color.gray)
             
-            Spacer()
+            Divider()
+            
             HStack {
-                Text("- 1 +")
-                
+                HStack{
+                    Button(action: {
+                        
+                    }, label: {
+                        Image(systemName: "minus.circle.fill")
+                            .foregroundColor(.gray)
+                            .font(.title)
+                    })
+                    Text("1")
+                        .bold()
+                        .font(.title2)
+                        .foregroundColor(.black)
+                    Button(action: {
+                        
+                    }, label: {
+                        Image(systemName: "plus.circle.fill")
+                            .foregroundColor(.black)
+                            .font(.title)
+                    })
+                }
+                .padding(10)
+                .background(Capsule().stroke(Color.gray, lineWidth: 3.0))
+                .cornerRadius(30)
                 Spacer()
                 Text(String(format: "%.2f USD", (foodPrice)))
-                    .font(.title2)
+                    .font(.largeTitle)
+                    .bold()
             }
             .padding()
-            Spacer()
             Text("Add to cart")
+                .frame(maxWidth: .infinity)
                 .font(.headline)
                 .foregroundColor(.white)
                 .padding()
@@ -79,7 +107,7 @@ struct ShowFood : View {
             
             Spacer()
         }
-        .padding()
+        .padding().padding().padding()
     }
 }
 

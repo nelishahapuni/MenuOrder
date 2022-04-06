@@ -15,4 +15,72 @@
 \cf2 //        FoodModel(foodName: "Chicken Burger", foodDesc: "Crunchy and light chicken burger, with deliciously tender chicken breast, tomatoes, fresh lettuce and soft buns.", imageName: "chicken_burger", foodPrice: 4.99, isAvailable: true),\cf4 \
 \cf2 //        FoodModel(foodName: "Triple Burger", foodDesc: "Original classic burger, with with TRIPLE meat, grilled to perfection, topped with tomatoes, fresh lettuce and soft buns.", imageName: "triple_burger", foodPrice: 8.69, isAvailable: false),\cf4 \
 \cf2 //        FoodModel(foodName: "Onion Burger", foodDesc: "Sweet yet salty onion burger, with mouth-watering tender meat, tomatoes, fresh lettuce and soft buns.", imageName: "onion_burger", foodPrice: 7.29, isAvailable: true),\cf4 \
-\cf2 //    ]}
+\cf2 //    ]\
+\
+\cf4 \
+            \cf2 //                LazyVGrid(columns: [GridItem(.fixed(150))]) \{\cf4 \
+            \cf2 //                    ForEach((0...250), id: \\.self) \{ _ in\cf4 \
+            \cf2 //                        ColorView()\cf4 \
+            \cf2 //                    \}\cf4 \
+            \cf2 //                \}\cf4 \
+            \
+            \cf2 //                ScrollView\{\cf4 \
+            \cf2 //                    HStack\{\cf4 \
+            \cf2 //                        Spacer()\cf4 \
+            \cf2 //                        FoodThumbnail(imageName: "hamburger")\cf4 \
+            \cf2 //                        FoodThumbnail(imageName: "cheeseburger")\cf4 \
+            \cf2 //                        Spacer()\cf4 \
+            \cf2 //                    \}\cf4 \
+            \cf2 //                    HStack\{\cf4 \
+            \cf2 //                        Spacer()\cf4 \
+            \cf2 //                        FoodThumbnail(imageName: "bacon_burger")\cf4 \
+            \cf2 //                        FoodThumbnail(imageName: "chicken_burger")\cf4 \
+            \cf2 //                        Spacer()\cf4 \
+            \cf2 //                    \}\cf4 \
+            \cf2 //                    HStack\{\cf4 \
+            \cf2 //                        Spacer()\cf4 \
+            \cf2 //                        FoodThumbnail(imageName: "triple_burger")\cf4 \
+            \cf2 //                        FoodThumbnail(imageName: "onion_burger")\cf4 \
+            \cf2 //                        Spacer()\cf4 \
+            \cf2 //                    \}\cf4 \
+            \cf2 //\cf4 \
+            \cf2 //                \}\cf4 \
+            \
+            \cf2 //            ScrollView\{\cf4 \
+            \cf2 //                LazyVGrid(\cf4 \
+            \cf2 //                    columns: columnsInfo,\cf4 \
+            \cf2 //                    alignment: .center,\cf4 \
+            \cf2 //                    spacing: 6,\cf4 \
+            \cf2 //                    pinnedViews: [.sectionHeaders],\cf4 \
+            \cf2 //                    content: \{\cf4 \
+            \cf2 //                        Section(header:\cf4 \
+            \cf2 //                                    Text("Section 1")\cf4 \
+            \cf2 //                                    .padding()\cf4 \
+            \cf2 //                                    .frame(maxWidth: .infinity, alignment: .leading)\cf4 \
+            \cf2 //                                    .background(Color.blue)\cf4 \
+            \cf2 //                                    .font(.title)\cf4 \
+            \cf2 //                                    .foregroundColor(.white)\cf4 \
+            \cf2 //\cf4 \
+            \cf2 //                        ) \{\cf4 \
+            \cf2 //                            ForEach(burgerViewModel.burgerArray) \{ burger in\cf4 \
+            \cf2 //                                ShowFood(foodName: burger.foodName, foodDesc: burger.foodDesc, imageName: burger.imageName, foodPrice: burger.foodPrice, isAvailable: burger.isVegan)\cf4 \
+            \cf2 //                            \}\cf4 \
+            \cf2 //\cf4 \
+            \cf2 //                        \})\cf4 \
+            \cf2 //                    \}\cf4 \
+            \cf2 //\cf4 \
+            \cf2 //                \}\
+\
+\
+//                    \cf4 \
+\cf2 //                    Button(action: \{\cf4 \
+\cf2 //                        \cf4 \
+\cf2 //                    \}, label: \{\cf4 \
+\cf2 //                        Image(systemName: "plus")\cf4 \
+\cf2 //                            .foregroundColor(.white)\cf4 \
+\cf2 //                            .font(.headline)\cf4 \
+\cf2 //                            .padding(10)\cf4 \
+\cf2 //                            .background(Color.orange)\cf4 \
+\cf2 //                            .cornerRadius(10)\cf4 \
+\cf2 //                            .shadow(color: .red.opacity(0.4), radius: 5, x: 3, y: 3)\cf4 \
+\cf2 //                    \})}

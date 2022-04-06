@@ -9,50 +9,54 @@ import SwiftUI
 
 struct MainMenu: View {
     
+    @StateObject private var burgerViewModel: BurgerViewModel = BurgerViewModel()
+    
+    let columnsInfo: [GridItem] = [
+        GridItem(.flexible(), spacing: nil, alignment: nil),
+        GridItem(.flexible(), spacing: nil, alignment: nil),
+        
+    ]
     
     var body: some View {
-        NavigationView{
-            ZStack{
-                Color.orange.ignoresSafeArea()
-                
-//                LazyVGrid(columns: [GridItem(.fixed(150))]) {
-//                    ForEach((0...250), id: \.self) { _ in
-//                        ColorView()
-//                    }
-//                }
-                
-//                ScrollView{
-//                    HStack{
-//                        Spacer()
-//                        FoodThumbnail(imageName: "hamburger")
-//                        FoodThumbnail(imageName: "cheeseburger")
-//                        Spacer()
-//                    }
-//                    HStack{
-//                        Spacer()
-//                        FoodThumbnail(imageName: "bacon_burger")
-//                        FoodThumbnail(imageName: "chicken_burger")
-//                        Spacer()
-//                    }
-//                    HStack{
-//                        Spacer()
-//                        FoodThumbnail(imageName: "triple_burger")
-//                        FoodThumbnail(imageName: "onion_burger")
-//                        Spacer()
-//                    }
-//
-//                }
-                
+        ZStack{
+            Color.orange.ignoresSafeArea()
+            ScrollView{
+                LazyVGrid(
+                    columns: columnsInfo,
+                    alignment: .center,
+                    spacing: nil,
+                    pinnedViews: [.sectionHeaders],
+                    content: {
+                        Section(header:
+                                    Text("Burgers")
+                                    .padding()
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                                    .background(Color.white)
+                                    .font(.title)
+                                    .foregroundColor(.orange)
+                                    .cornerRadius(30)
+                        ) {
+                            ForEach(burgerViewModel.burgerArray) { burger in
+                                FoodThumbnail(foodName: burger.foodName, foodDesc: burger.foodDesc, imageName: burger.imageName, foodPrice: burger.foodPrice, isAvailable: burger.isVegan)
+                            }
+                        }
+                        
+                        
+                    })
+                    .padding()
             }
-            //.scaledToFill()
-            .navigationTitle("Main Menu")
+            
         }
     }
 }
 
 struct FoodThumbnail: View {
     
+    var foodName : String
+    var foodDesc : String
     var imageName : String
+    var foodPrice : Double
+    var isAvailable : Bool
     
     var body: some View {
         VStack{
@@ -61,29 +65,24 @@ struct FoodThumbnail: View {
                 .resizable()
                 .scaledToFill()
                 .frame(width: UIScreen.main.bounds.size.width*0.33, height: UIScreen.main.bounds.size.height*0.15)
-                .padding(.horizontal)
+                .padding()
             VStack{
-                Text("Burger")
-                    .bold()
-                    .font(.title)
-                    Text("$5.67")
-                        .font(.title2)
-                        .foregroundColor(.orange)
+                HStack{
+                    Text(foodName)
+                        .bold()
+                        .font(.title3)
                     
-                    Button(action: {
-                        
-                    }, label: {
-                        Image(systemName: "plus")
-                            .foregroundColor(.white)
-                            .font(.headline)
-                            .padding(10)
-                            .background(Color.orange)
-                            .cornerRadius(10)
-                            .shadow(color: .red.opacity(0.4), radius: 5, x: 3, y: 3)
-                    })
+                    if isAvailable {
+                        Image(systemName: "leaf.fill")
+                            .foregroundColor(.blue)
+                            .font(.subheadline)
+                    }
+                }
+                Text(String(format: "$%.2f", (foodPrice)))
+                    .font(.title2)
+                    .foregroundColor(.orange)
             }
-            .padding()
-            
+            Spacer()
         }
         .background(Color.white.opacity(0.9))
         .cornerRadius(20)
