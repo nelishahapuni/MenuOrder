@@ -18,37 +18,19 @@ struct FoodModel: Identifiable {
 
 struct ContentView: View {
     
-    @State var burgersInfo : [FoodModel] = [
-        FoodModel(foodName: "Hamburger", foodDesc: "Original classic burger, with mouth-watering tender meat, tomatoes, fresh lettuce and soft buns.", imageName: "hamburger", foodPrice: 5.89, isAvailable: true),
-        FoodModel(foodName: "Cheeseburger", foodDesc: "Feverishly good cheeseburger, with mouth-watering amerian cheese grilled into tender meat, with tomatoes, fresh lettuce and soft buns.", imageName: "cheeseburger", foodPrice: 6.79, isAvailable: true),
-        FoodModel(foodName: "Bacon Burger", foodDesc: "Rare bacon burger, with thin but crunchy bacon strips, tomatoes, fresh lettuce and soft buns.", imageName: "bacon_burger", foodPrice: 5.59, isAvailable: false),
-        FoodModel(foodName: "Chicken Burger", foodDesc: "Crunchy and light chicken burger, with deliciously tender chicken breast, tomatoes, fresh lettuce and soft buns.", imageName: "chicken_burger", foodPrice: 4.99, isAvailable: true),
-        FoodModel(foodName: "Triple Burger", foodDesc: "Original classic burger, with with TRIPLE meat, grilled to perfection, topped with tomatoes, fresh lettuce and soft buns.", imageName: "triple_burger", foodPrice: 8.69, isAvailable: false),
-        FoodModel(foodName: "Onion Burger", foodDesc: "Sweet yet salty onion burger, with mouth-watering tender meat, tomatoes, fresh lettuce and soft buns.", imageName: "onion_burger", foodPrice: 7.29, isAvailable: true),
-    ]
-    
-    @State var isAnimated: Bool = false
+    @StateObject var burgerViewModel: BurgerViewModel = BurgerViewModel()
     
     var body: some View {
         ZStack {
-            (isAnimated ? Color(#colorLiteral(red: 0.9143522382, green: 0.8826459646, blue: 0.9681094289, alpha: 1)) : Color(#colorLiteral(red: 0.9489904046, green: 0.9217998385, blue: 0.7842540145, alpha: 1))).ignoresSafeArea()
-                .animation(Animation
-                            .easeIn)
-            
+            Color(#colorLiteral(red: 0.9489904046, green: 0.9217998385, blue: 0.7842540145, alpha: 1)).ignoresSafeArea()
             
             VStack {
                 TabView{
-                    ForEach(burgersInfo) { burger in
+                    ForEach(burgerViewModel.burgerArray) { burger in
                         ShowFood(foodName: burger.foodName, foodDesc: burger.foodDesc, imageName: burger.imageName, foodPrice: burger.foodPrice, isAvailable: burger.isAvailable)
                     }
-                    
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                .onTapGesture(perform: {
-                    isAnimated.toggle()
-                })
-                
-                
             }
         }
     }
