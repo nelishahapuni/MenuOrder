@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  DetailedView.swift
 //  MenuOrderAdvanced
 //
 //  Created by Neli Shahapuni on 4/5/22.
@@ -7,16 +7,7 @@
 
 import SwiftUI
 
-struct FoodModel: Identifiable {
-    let id : String = UUID().uuidString //this creates a new automatic random ID for each elem (no need to pass id below)
-    let foodName : String
-    let foodDesc : String
-    let imageName : String
-    let foodPrice : Double
-    let isVegan : Bool
-}
-
-struct ContentView: View {
+struct DetailedView: View {
     
     
     //NOTE TO SELF: Use the index of the tab view to access the specific burger
@@ -25,20 +16,42 @@ struct ContentView: View {
     
     @StateObject private var burgerViewModel: BurgerViewModel = BurgerViewModel()
     
+    @State var selectedFoodTag : Int = 1
+    
+    @State var selectedFood: String
+    var foodName : String
+    var foodDesc : String
+    var imageName : String
+    var foodPrice : Double
+    var isVegan : Bool
     
     var body: some View {
         ZStack {
             Color(#colorLiteral(red: 0.9489904046, green: 0.9217998385, blue: 0.7842540145, alpha: 1)).ignoresSafeArea()
             
             VStack {
-                TabView{
-                    ForEach(burgerViewModel.burgerArray) { burger in
-                        ShowFood(foodName: burger.foodName, foodDesc: burger.foodDesc, imageName: burger.imageName, foodPrice: burger.foodPrice, isAvailable: burger.isVegan)
-                    }
-                }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                
+                TabView(selection: $selectedFoodTag,
+                        content:  {
+                            ForEach(burgerViewModel.burgerArray) { burger in
+                                VStack{//delete this vstack later
+                                    ShowFood(foodName: foodName, foodDesc: foodDesc, imageName: imageName, foodPrice: foodPrice, isVegan: isVegan)
+                                }
+                                .tag(getIndex(name: selectedFood))
+                            }
+                        })
+                    .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             }
         }
+    }
+    
+    func getIndex(name: String) -> Int {
+        for i in 0..<burgerViewModel.burgerArray.count {
+            if burgerViewModel.burgerArray[i].imageName == name {
+                return i
+            }
+        }
+        return 0
     }
 }
 
@@ -47,7 +60,8 @@ struct ShowFood : View {
     var foodDesc : String
     var imageName : String
     var foodPrice : Double
-    var isAvailable : Bool
+    var isVegan : Bool
+    
     var body: some View {
         VStack(alignment: .leading) {
             Spacer()
@@ -57,11 +71,11 @@ struct ShowFood : View {
                 .frame(width: UIScreen.main.bounds.size.width*0.8, height: UIScreen.main.bounds.size.height*0.3)
                 .padding()
             HStack{
-            Text(foodName)
-                .bold()
-                .font(.title)
+                Text(foodName)
+                    .bold()
+                    .font(.title)
                 
-                if isAvailable {
+                if isVegan {
                     Image(systemName: "leaf.fill")
                         .foregroundColor(.blue)
                 }
@@ -117,8 +131,8 @@ struct ShowFood : View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct DetailedView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        MainMenu()
     }
 }
