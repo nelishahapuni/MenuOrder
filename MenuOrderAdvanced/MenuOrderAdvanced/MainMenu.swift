@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+//MARK: FOOD MODEL
+
 struct FoodModel: Identifiable {
     let id : String = UUID().uuidString 
     let foodName : String
@@ -16,6 +18,8 @@ struct FoodModel: Identifiable {
     let isVegan : Bool
 }
 
+//MARK: MAIN MENU
+
 struct MainMenu: View {
     
     @StateObject private var burgerViewModel: BurgerViewModel = BurgerViewModel()
@@ -23,7 +27,6 @@ struct MainMenu: View {
     let columnsInfo: [GridItem] = [
         GridItem(.flexible(), spacing: nil, alignment: nil),
         GridItem(.flexible(), spacing: nil, alignment: nil),
-        
     ]
     
     var body: some View {
@@ -49,15 +52,12 @@ struct MainMenu: View {
                                 ForEach(burgerViewModel.burgerArray) { burger in
                                     
                                     NavigationLink(
-                                        destination: DetailedView(selectedFood:burger.imageName, foodName: burger.foodName, foodDesc: burger.foodDesc, imageName: burger.imageName, foodPrice: burger.foodPrice, isVegan: burger.isVegan),
+                                        destination: DetailedView (foodName: burger.foodName, foodDesc: burger.foodDesc, imageName: burger.imageName, foodPrice: burger.foodPrice, isVegan: burger.isVegan),
                                         label: {
                                             FoodThumbnail(foodName: burger.foodName, foodDesc: burger.foodDesc, imageName: burger.imageName, foodPrice: burger.foodPrice, isVegan: burger.isVegan)
                                         })
-                                    
                                 }
                             }
-                            
-                            
                         })
                         .padding()
                 }
@@ -67,6 +67,8 @@ struct MainMenu: View {
         }
     }
 }
+
+//MARK: FOOD THUMBNAIL
 
 struct FoodThumbnail: View {
     
@@ -107,10 +109,8 @@ struct FoodThumbnail: View {
         .cornerRadius(20)
         .padding(5)
         .shadow(color: .red.opacity(0.3), radius: 5, x: 10, y:10)
-        
     }
 }
-
 
 struct MainMenu_Previews: PreviewProvider {
     static var previews: some View {
